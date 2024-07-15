@@ -1,4 +1,4 @@
-package com.yoadev.flayerprojectapp
+package com.yoadev.flayerprojectapp.ui.home
 
 import android.os.Bundle
 import android.view.Menu
@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.yoadev.flayerprojectapp.R
 import com.yoadev.flayerprojectapp.databinding.ActivityNavigationDrawerBinding
 
 class NavigationDrawerActivity : AppCompatActivity() {
@@ -38,7 +39,7 @@ class NavigationDrawerActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_event, R.id.mapFragment,R.id.nav_calendar
+                R.id.nav_home, R.id.nav_event, R.id.mapFragment, R.id.nav_calendar
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
