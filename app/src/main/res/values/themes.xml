@@ -13,6 +13,12 @@
         <item name="android:statusBarColor">@color/primaryDark</item>
         <!-- Customize your theme here. -->
     </style>
+    
+    <!-- Style Image Rounded  -->
+    <style name="roundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 
     <style name="Theme.FlayerProjectApp.NoActionBar">
         <item name="windowActionBar">false</item>
