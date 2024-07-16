@@ -1,6 +1,7 @@
 package com.yoadev.flayerprojectapp.ui.home
 
 import androidx.lifecycle.ViewModel
+import com.yoadev.flayerprojectapp.data.providers.HomeProvider
 import com.yoadev.flayerprojectapp.domain.model.EventInfo
 import com.yoadev.flayerprojectapp.domain.model.EventInfo.*
 
@@ -11,7 +12,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(homeProvider: HomeProvider) : ViewModel() {
 
 
     /**
@@ -21,9 +22,8 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     val home: StateFlow<List<EventInfo>> = _home
 
     init {
-        _home.value = listOf(
-            Fiesta, Concierto, Electro, Rock
-        )
+        _home.value = homeProvider.getEvents()
+
     }
 
 
