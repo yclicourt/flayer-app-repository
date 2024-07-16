@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.yoadev.flayerprojectapp.databinding.FragmentEventBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EventFragment : Fragment() {
 
     private var _binding: FragmentEventBinding? = null
@@ -21,7 +23,6 @@ class EventFragment : Fragment() {
     ): View {
 
         _binding = FragmentEventBinding.inflate(layoutInflater, container, false)
-
         return binding.root
     }
 
