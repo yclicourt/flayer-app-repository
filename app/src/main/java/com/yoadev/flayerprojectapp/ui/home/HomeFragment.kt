@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yoadev.flayerprojectapp.databinding.FragmentHomeBinding
 import com.yoadev.flayerprojectapp.ui.home.adapter.HomeAdapter
+import com.yoadev.flayerprojectapp.ui.home.adapter.ProjectAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -27,6 +28,7 @@ class HomeFragment : Fragment() {
      */
     private val homeViewModel by viewModels<HomeViewModel>()
     private lateinit var homeAdapter: HomeAdapter
+    private lateinit var projectAdapter: ProjectAdapter
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -45,14 +47,24 @@ class HomeFragment : Fragment() {
 
     private fun initList() {
         /**
-         * Inicializacion de un recyclerView
+         * Inicializacion de un recyclerView Event
          */
 
         homeAdapter = HomeAdapter()
 
         binding.rvEvent.apply {
-            layoutManager = GridLayoutManager(context,4)
+            layoutManager = GridLayoutManager(context, 4)
             adapter = homeAdapter
+        }
+
+        /**
+         * Inicializacion de un recyclerView Project
+         */
+        projectAdapter = ProjectAdapter()
+
+        binding.rvProject.apply {
+            layoutManager = GridLayoutManager(context, 5)
+            adapter = projectAdapter
         }
     }
 
@@ -63,6 +75,13 @@ class HomeFragment : Fragment() {
                     homeAdapter.updateList(it)
                 }
 
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                homeViewModel.project.collect {
+                    projectAdapter.updateList(it)
+                }
             }
         }
     }
