@@ -2,24 +2,21 @@ package com.yoadev.flayerprojectapp.ui.home
 
 import android.animation.ValueAnimator
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.BounceInterpolator
-import android.view.animation.OvershootInterpolator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.yoadev.flayerprojectapp.databinding.FragmentHomeBinding
 import com.yoadev.flayerprojectapp.ui.home.adapter.HomeAdapter
 import com.yoadev.flayerprojectapp.ui.home.adapter.ProjectAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -52,16 +49,20 @@ class HomeFragment : Fragment() {
     private fun initListeners() {
         binding.parentContainer.setOnClickListener {
             initAnimation()
+            findNavController().navigate(
+                HomeFragmentDirections.actionNavHomeToEventHomeDetailActivity()
+            )
+
         }
     }
 
 
     private fun initAnimation() {
         binding.cvPoster.alpha = 0f
-        val animator = ValueAnimator.ofFloat(0f,1f)
+        val animator = ValueAnimator.ofFloat(0f, 1f)
         animator.duration = 5000
-        animator.interpolator = OvershootInterpolator()
-        animator.addUpdateListener { valueAnimator->
+        animator.interpolator = BounceInterpolator()
+        animator.addUpdateListener { valueAnimator ->
             val animatedValue = valueAnimator.animatedValue as Float
             binding.cvPoster.alpha = animatedValue
             binding.cvPoster.scaleX = animatedValue
