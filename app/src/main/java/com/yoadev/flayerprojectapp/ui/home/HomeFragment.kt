@@ -1,10 +1,13 @@
 package com.yoadev.flayerprojectapp.ui.home
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.BounceInterpolator
+import android.view.animation.OvershootInterpolator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -43,6 +46,29 @@ class HomeFragment : Fragment() {
     private fun initUI() {
         initList()
         initUIState()
+        initListeners()
+    }
+
+    private fun initListeners() {
+        binding.parentContainer.setOnClickListener {
+            initAnimation()
+        }
+    }
+
+
+    private fun initAnimation() {
+        binding.cvPoster.alpha = 0f
+        val animator = ValueAnimator.ofFloat(0f,1f)
+        animator.duration = 5000
+        animator.interpolator = OvershootInterpolator()
+        animator.addUpdateListener { valueAnimator->
+            val animatedValue = valueAnimator.animatedValue as Float
+            binding.cvPoster.alpha = animatedValue
+            binding.cvPoster.scaleX = animatedValue
+            binding.cvPoster.scaleY = animatedValue
+
+        }
+        animator.start()
     }
 
     private fun initList() {
